@@ -64,10 +64,65 @@ export function Reviews() {
   ];
 
   return (
-    <Box sx={{ mt: 8 }}>
+    <Box sx={{ mt: 4 }}>
+      <Divider sx={{ mb: 4 }} />
       <Text fs="24px" fw="800" color="#000">
         Reviews
       </Text>
+
+      <Box my={2} bgcolor="#002884" p={3} borderRadius="15px">
+        <Stack direction="row" justifyContent="space-between">
+          <Text fs="18px" fw="800" color="#fff">
+            11 reviews for this Gig
+          </Text>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <Rating value={4.9} readOnly sx={{ color: "#fff" }} />
+            <Text fs="18px" fw="500" color="#fff">
+              4.9
+            </Text>
+          </Box>
+        </Stack>
+        <Stack
+          direction={{ md: "row", lg: "row", sm: "column", xs: "column" }}
+          mt={3}
+          justifyContent="space-between"
+        >
+          <Stack spacing={1}>
+            <Text fs="18px" fw="300" color="#ccc">
+              Seller communication level
+            </Text>
+            <Box display="flex" flexDirection="row" alignItems="center" ml={2}>
+              <Rating value={5} readOnly sx={{ color: "#fff" }} />
+              <Text fs="18px" fw="500" color="#fff">
+                5
+              </Text>
+            </Box>
+          </Stack>
+          <Stack spacing={1}>
+            <Text fs="18px" fw="300" color="#ccc">
+              Recommend to a friend
+            </Text>
+            <Box display="flex" flexDirection="row" alignItems="center" ml={2}>
+              <Rating value={5} readOnly sx={{ color: "#fff" }} />
+              <Text fs="18px" fw="500" color="#fff">
+                5
+              </Text>
+            </Box>
+          </Stack>
+          <Stack spacing={1}>
+            <Text fs="18px" fw="300" color="#ccc">
+              Service as described
+            </Text>
+            <Box display="flex" flexDirection="row" alignItems="center" ml={2}>
+              <Rating value={5} readOnly sx={{ color: "#fff" }} />
+              <Text fs="18px" fw="500" color="#fff">
+                4.8
+              </Text>
+            </Box>
+          </Stack>
+        </Stack>
+      </Box>
+      <Divider sx={{ my: 4 }} />
       {userReviews.map((item, index) => (
         <CardContent key={index}>
           <Grid container alignItems="center" spacing={3}>
@@ -85,25 +140,27 @@ export function Reviews() {
             </Grid>
           </Grid>
 
-          {item.reply?.name && <Box ml={4} mb={4}>
-            <Box mt={4}>
-              <Grid container alignItems="center" spacing={3} key={index}>
-                <Grid item>
-                  <Avatar title={item.reply?.name} />
-                </Grid>
-                <Grid item xs>
-                  <Text fs="18px" fw="600" color="#000">
-                    {item.reply?.name}
-                  </Text>
+          {item.reply?.name && (
+            <Box ml={4} mb={4}>
+              <Box mt={4}>
+                <Grid container alignItems="center" spacing={3} key={index}>
+                  <Grid item>
+                    <Avatar title={item.reply?.name} />
+                  </Grid>
+                  <Grid item xs>
+                    <Text fs="18px" fw="600" color="#000">
+                      {item.reply?.name}
+                    </Text>
 
-                  <Text fs="16px" fw="400">
-                    {item.reply?.content}
-                  </Text>
+                    <Text fs="16px" fw="400">
+                      {item.reply?.content}
+                    </Text>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </Box>
             </Box>
-          </Box>}
-           <Divider  />
+          )}
+          <Divider />
         </CardContent>
       ))}
     </Box>

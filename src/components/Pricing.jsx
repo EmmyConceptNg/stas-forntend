@@ -81,11 +81,11 @@ export default function Pricing() {
               onChange={handleChange}
               aria-label="Packages"
               sx={{
-                display: "grid",
-
+                display: "flex", // Change to flex
                 gap: "1px",
                 borderBottom: "1px solid #ccc",
                 width: "100%",
+                justifyContent: "space-between", // Add this line
               }}
             >
               {packages.map((item) => (
@@ -94,6 +94,7 @@ export default function Pricing() {
                   label={item.name}
                   value={item.id}
                   sx={{
+                    flex: 1, // Make the tabs fill up space
                     borderBottom: "1px solid #ccc",
                     borderRight: "1px solid #ccc",
                     backgroundColor: "#f9f9f9",
@@ -104,6 +105,7 @@ export default function Pricing() {
                 />
               ))}
             </TabList>
+
             {packages.map((item) => (
               <TabPanel key={item.id} value={item.id}>
                 <Box>

@@ -48,8 +48,8 @@ export default function Hero() {
           <Avatar
             sx={{
               overflow: "hidden",
-              width: { md: "100px", lg: "100px", xs: "50px", sm: "50px" },
-              height: { md: "100px", lg: "100px", xs: "50px", sm: "50px" },
+              width: { md: "80px", lg: "80px", xs: "45px", sm: "45px" },
+              height: { md: "80px", lg: "80px", xs: "45px", sm: "45px" },
               position: "relative",
               border: "#76D14B solid 3px",
             }}
@@ -69,7 +69,7 @@ export default function Hero() {
             </video>
           </Avatar>
           <Box>
-            <Text fw="800" fs="24px" color="#000">
+            <Text fw="700" fs="24px" color="#000">
               Stas Sorokin{" "}
             </Text>
             <Stack
