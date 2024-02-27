@@ -1,15 +1,21 @@
 import { Check, PlayCircle, Verified, VerifiedOutlined } from "@mui/icons-material";
-import { Grid, Box, Typography, Button, CardMedia, Card, CardContent, Stack } from "@mui/material";
+import { Grid, Box, Typography, Button, CardMedia, Card, CardContent, Stack, Divider } from "@mui/material";
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
 import { Typewriter } from "react-simple-typewriter";
 import Text from "./utils/Text";
+import SubscriptionModal from "./SubscriptionModal";
+import Pricing from "./Pricing";
 
 export default function Video() {
  const [showVideo, setShowVideo] = useState(false);
  const [videoVolume, setVideoVolume] = useState(0);
-
+const [open, setOpen] = useState(false);
+const handleContinue = (item) => {
+  
+  setOpen(true);
+};
  const handlePlayClick = () => {
    setVideoVolume(1);
  };
@@ -48,32 +54,71 @@ export default function Video() {
  return (
    <>
      <CardMedia
-       sx={{ mb: "50px" }}
-       component={showVideo ? "video" : "img"}
+       sx={{ mb: "10px" }}
+       component={showVideo ? "iframe" : "img"}
        alt="Multimedia"
-       height="100%"
+       height={showVideo ? "400px" : "auto"}
        width="100%"
-       controls={showVideo}
-       muted={!videoVolume}
-       volume={videoVolume}
-       id="video" // add id to reference the video element
+       title="Multimedia"
        src={
-         showVideo ? "/assets/videos/IMG_0964.MOV" : "/assets/images/stas.jpeg"
+         showVideo
+           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG"
+           : "/assets/images/stas.jpeg"
        }
+       allowFullScreen={showVideo}
      />
-     {showVideo && (
-       <Box
-         display={videoVolume === 1 ? "none" : "block"}
-         position="absolute"
-         top={{ md: "57%", xs: "50%", sm: "50%" }}
-         left={{ md: "33%", xs: "36%", sm: "45%" }}
-         transform="translate(-50%, -50%)"
+     <Box
+       bgcolor="#002884"
+       borderRadius={3}
+       width="100%"
+       sx={{ mb: "20px" }}
+       p={2}
+     >
+       <Text fs="18px" fw="600" color="#fff">
+         Take 5 % off your next order
+       </Text>
+       <Text fs="18px" fw="400" color="#fff" my="20px">
+         Stas Sorokin choose to give you an exclusive coupon for their Gigs
+       </Text>
+       <Text
+         fs="18px"
+         fw="400"
+         color="#fff"
+         sx={{ cursor: "pointer", textDecoration: "underline" }}
+         onClick={handleContinue}
        >
-         <Button onClick={handlePlayClick} color="error">
-           <PlayCircle sx={{ fontSize: "100px" }} />
-         </Button>
-       </Box>
-     )}
+         Learn More
+       </Text>
+     </Box>
+
+     <Typography
+       display={{ md: "none", lg: "none", sm: "block", xs: "block" }}
+       variant="h1"
+       sx={{
+         color: "#000",
+         fontWeight: "bold",
+         lineSpacing: "auto",
+         lineHeight: {
+           md: "40px",
+           xs: "35px",
+           sm: "35px",
+           lg: "40px",
+         },
+         fontSize: {
+           md: "32px",
+           xs: "30px",
+           sm: "30px",
+           lg: "32px",
+         },
+         mb: "50px",
+         textAlign: "left",
+       }}
+     >
+       <Divider sx={{ mb: 2 }} />
+       I will develop a chatgpt ai app, api, saas gpt web application, software
+       developer.
+       <Divider sx={{ mt: 2 }} />
+     </Typography>
      <Box>
        <Text fs="18px" fw="600" color="#000">
          Expert Software Development Full Stack Lead Engineer
@@ -126,6 +171,9 @@ export default function Video() {
          </Text>
        )}
      </Box>
+     <Box my={4} display={{ md : 'none', lg : 'none', sm : 'block', xs : 'block' }}>
+       <Pricing />
+     </Box>
      <Box
        mt={5}
        p={4}
@@ -157,7 +205,10 @@ export default function Video() {
        <Text fs="18px" fw="600" color="#000" mb="10px">
          Expert in:
        </Text>
-       <Stack direction="row" spacing={10}>
+       <Stack
+         direction={{ md: "row", lg: "row", xs: "column", sm: "column" }}
+         spacing={{ md: 10, lg: 10, sm: 2, xs: 2 }}
+       >
          {["Software Development", "Website Development"].map((item, index) => (
            <Stack spacing={3} key={index} direction="row">
              <Verified color="primary" />
@@ -168,6 +219,7 @@ export default function Video() {
          ))}
        </Stack>
      </Box>
+     <SubscriptionModal open={open} setOpen={setOpen} />
    </>
  );
 }

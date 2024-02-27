@@ -26,7 +26,6 @@ export default function App() {
           }}
         >
           <Box mx={{ md: 20, sm:10, xs:5 }}>
-            <Header />
 
             <Grid container spacing={{ md: 5, sm: 2, xs: 2 }}>
               <Grid item md={8} sm={12} xs={12}>
@@ -48,7 +47,7 @@ export default function App() {
                 </Element>
               </Grid>
               <Grid item md={4} sm={12} xs={12}>
-                <Box mt={10} position="sticky" top={0}>
+                <Box mt={10} position="sticky" top={0} display={{ md : 'block', lg : 'block', xs : 'none', sm : 'none' }}>
                   <Pricing />
                 </Box>
               </Grid>

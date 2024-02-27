@@ -72,14 +72,12 @@ export default function Header(props) {
         <ToolbarStyled style={{ padding: 0 }}>
           <Box display="flex" mr={3}>
             <Box my="auto"
-              component="div"
-             
-            >
-              <Text fw="800" color="#222325" fs="25px">STAS</Text>
-            </Box>
+              component="img"
+             src="assets/images/bles-logo.png"
+            width="50px" />
           </Box>
 
-<Box display="flex" alignItems="center">
+<Box display={{ md :"flex", lg: 'flex', sm : 'none', xs:'none'  }} alignItems="center" >
   <Box >
     <TextField size={'small'} sx={{ width:"400px", }} />
   </Box>
@@ -98,7 +96,7 @@ export default function Header(props) {
               },
             }}
           >
-            <Navbar />
+            
           </Box>
           <Box
             sx={{
