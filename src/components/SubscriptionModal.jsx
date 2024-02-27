@@ -90,14 +90,14 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
         },
       })
       .then((response) => {
+         location.href =
+           "https://www.fiverr.com/stas4000/develop-or-integrate-ai-powered-web-app-using-gpt3-or-openai";
         notify(
           "Thank You, You'll be redirected soon",
           "success"
         );
         setSave(false);
         setOpen(false);
-        location.href =
-          "https://www.fiverr.com/stas4000/develop-or-integrate-ai-powered-web-app-using-gpt3-or-openai";
       })
       .catch((error) => {
         notify(error?.response?.data?.error, "error");
@@ -120,31 +120,21 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
           onClick: handleClose,
         }}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-            Subscribe to {bot?.name}
-          </Typography>
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          s
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
+        
+        
         <DialogContent dividers>
-          <Box component="form" onSubmit={handleSubmit}>
-            <Stack spacing={2}>
-              <FormControl variant="outlined" sx={{ width: "100%" }}>
+          <Box component="form" onSubmit={handleSubmit} width="100%">
+            
+            
+            <Stack spacing={2} width="100%">
+              
+            
+              <FormControl variant="outlined" fullWidth>
+                
+            
                 <InputLabel htmlFor="firstName">First Name</InputLabel>
                 <OutlinedInput
-                  required
+                  required size="small"
                   id="firstName"
                   type="firstName"
                   name="firstName"
@@ -153,10 +143,12 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   label="First Name"
                 />
               </FormControl>
-              <FormControl variant="outlined" sx={{ width: "100%" }}>
+              <FormControl variant="outlined" fullWidth>
+                
+                {/* Set fullWidth to make the FormControl fill the entire width */}
                 <InputLabel htmlFor="lastName">Last Name</InputLabel>
                 <OutlinedInput
-                  required
+                  required size="small"
                   id="lastName"
                   type="lastName"
                   name="lastName"
@@ -165,10 +157,12 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   label="Last Name"
                 />
               </FormControl>
-              <FormControl variant="outlined" sx={{ width: "100%" }}>
+              <FormControl variant="outlined" fullWidth>
+                
+                {/* Set fullWidth to make the FormControl fill the entire width */}
                 <InputLabel htmlFor="email">Email</InputLabel>
                 <OutlinedInput
-                  required
+                  required size="small"
                   id="email"
                   type="email"
                   name="email"
@@ -177,18 +171,18 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   label="Email"
                 />
               </FormControl>
-
               <Box width="100%">
                 <PhoneInput
+                  forceDialCode
                   defaultCountry="ua"
                   value={payload.phone}
                   onChange={(value, name) => handlePhonChange(value, name)}
                   name="phone"
-                  style={{ minWidth: "100%" }}
+                  containerStyle={{ width: "100%" }} // Ensure the container div fills the entire width
+                  inputStyle={{ width: "100%" }}
                 />
               </Box>
-
-              <Box display="flex">
+              <Box width="100%" display="flex" justifyContent="center">
                 <LoadingButton loading={save} type="submit" variant="contained">
                   Save
                 </LoadingButton>

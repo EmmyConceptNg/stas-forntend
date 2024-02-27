@@ -66,13 +66,13 @@ export function Reviews() {
   return (
     <Box sx={{ mt: 4 }}>
       <Divider sx={{ mb: 4 }} />
-      <Text fs="24px" fw="800" color="#000">
+      <Text fs="24px" fw="700" color="#000">
         Reviews
       </Text>
 
       <Box my={2} bgcolor="#002884" p={3} borderRadius="15px">
         <Stack direction="row" justifyContent="space-between">
-          <Text fs="18px" fw="800" color="#fff">
+          <Text fs="18px" fw="700" color="#fff">
             11 reviews for this Gig
           </Text>
           <Box display="flex" flexDirection="row" alignItems="center">

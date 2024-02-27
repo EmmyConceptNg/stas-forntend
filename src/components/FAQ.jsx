@@ -12,7 +12,7 @@ import Text from "./utils/Text";
 const FAQ = () => {
   return (
     <Box mt={9}>
-      <Text fs="24px" fw="800" color="#000">
+      <Text fs="24px" fw="700" color="#000">
         FAQ
       </Text>
       {[
