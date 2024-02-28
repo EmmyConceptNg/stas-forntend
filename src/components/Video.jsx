@@ -1,5 +1,5 @@
-import { Check, PlayCircle, Verified, VerifiedOutlined } from "@mui/icons-material";
-import { Grid, Box, Typography, Button, CardMedia, Card, CardContent, Stack, Divider } from "@mui/material";
+import { ChatBubbleOutlineOutlined, Check, LocationOnOutlined, PlayCircle, ShoppingBagOutlined, Verified, VerifiedOutlined } from "@mui/icons-material";
+import { Grid, Box, Typography, Button, CardMedia, Card, CardContent, Stack, Divider, Avatar } from "@mui/material";
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
@@ -54,7 +54,8 @@ const handleContinue = (item) => {
  return (
    <>
      <CardMedia
-       sx={{ mb: "10px" }}
+       
+       sx={{ mb: "10px", display : { md: "block", lg: "block", xs: "none", sm: "none" } }}
        component={showVideo ? "iframe" : "img"}
        alt="Multimedia"
        height={showVideo ? "400px" : "auto"}
@@ -62,18 +63,80 @@ const handleContinue = (item) => {
        title="Multimedia"
        src={
          showVideo
-           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG"
+           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG&autoplay=1&muted=1"
            : "/assets/images/stas.jpeg"
        }
        allowFullScreen={showVideo}
      />
-     <Box
-       bgcolor="#002884"
-       borderRadius={3}
+
+     {/* mobile */}
+     <CardMedia
+       sx={{ mb: "10px", display : { md: "none", lg: "none", xs: "block", sm: "block" } }}
+       component={showVideo ? "iframe" : "img"}
+       alt="Multimedia"
+       height={showVideo ? "auto" : "auto"}
        width="100%"
-       sx={{ mb: "20px" }}
-       p={2}
-     >
+       title="Multimedia"
+       src={
+         showVideo
+           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG&autoplay=1&muted=1"
+           : "/assets/images/stas.jpeg"
+       }
+       allowFullScreen={showVideo}
+     />
+     <Box display={{ xs: "block", md: "none", lg: "none", sm: "block" }} my={1}>
+       <Stack spacing={1} direction="row" alignItems="center">
+         <Avatar
+           onClick={handleContinue}
+           sx={{
+             overflow: "hidden",
+             width: { md: "80px", lg: "80px", xs: "25px", sm: "25px" },
+             height: { md: "80px", lg: "80px", xs: "25px", sm: "25px" },
+             position: "relative",
+             border: "#76D14B solid 3px",
+           }}
+         >
+           <video
+             style={{
+               position: "absolute",
+               width: "100%",
+               height: "100%",
+             }}
+             autoPlay
+             loop
+             muted
+           >
+             <source src="assets/videos/IMG_0964.MOV" type="video/mp4" />
+             Your browser does not support the video tag.
+           </video>
+         </Avatar>
+         <Box>
+           <Text fw="bold" fs="14px" color="#000">
+             Stas Sorokin
+           </Text>
+           <Stack
+             display={{ md: "flex", sm: "none", xs: "none" }}
+             direction={{ md: "row", lg: "row", sm: "column", xs: "column" }}
+             spacing={{ md: 3, lg: 3, sm: 1, xs: 1 }}
+             mt={1}
+           >
+             <Box display="flex" alignItems="center">
+               <LocationOnOutlined sx={{ color: "#606060" }} />
+               <Text>Israel</Text>
+             </Box>
+             <Box display="flex" alignItems="center">
+               <ChatBubbleOutlineOutlined sx={{ color: "#606060" }} />
+               <Text>I speak English, Russian</Text>
+             </Box>
+             <Box display="flex" alignItems="center">
+               <ShoppingBagOutlined sx={{ color: "#606060" }} />
+               <Text>114 orders completed</Text>
+             </Box>
+           </Stack>
+         </Box>
+       </Stack>
+     </Box>
+     <Box bgcolor="#002884" borderRadius={3} sx={{ mb: "20px" }} p={2}>
        <Text fs="18px" fw="600" color="#fff">
          Take 5 % off your next order
        </Text>
@@ -171,7 +234,7 @@ const handleContinue = (item) => {
          </Text>
        )}
      </Box>
-     <Box my={4} display={{ md : 'none', lg : 'none', sm : 'block', xs : 'block' }}>
+     <Box my={4} display={{ md: "none", lg: "none", sm: "block", xs: "block" }}>
        <Pricing />
      </Box>
      <Box

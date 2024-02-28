@@ -71,7 +71,7 @@ export function Reviews() {
       </Text>
 
       <Box my={2} bgcolor="#002884" p={3} borderRadius="15px">
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction={{ md:"row", lg: 'row', sm : 'column', xs : 'column' }} justifyContent="space-between">
           <Text fs="18px" fw="700" color="#fff">
             11 reviews for this Gig
           </Text>

@@ -19,6 +19,7 @@ export default function Hero() {
   return (
     <>
       <Box sx={{ my: 4 }}>
+        
         <Typography
           display={{ md: "block", lg: "block", sm: "none", xs: "none" }}
           variant="h1"
@@ -51,7 +52,7 @@ export default function Hero() {
           software developer.
         </Typography>
 
-        <Box>
+        <Box display={{ xs : 'none', md :'block', lg : 'block', sm :'none'  }}>
           <Stack spacing={3} direction="row" alignItems="center">
             <Avatar
               onClick={handleContinue}

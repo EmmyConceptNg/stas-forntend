@@ -25,7 +25,7 @@ export default function App() {
             pt: { md: 5, sm: 2, xs: 2, lg: 5, xl: 5 },
           }}
         >
-          <Box mx={{ md: 20, sm:10, xs:5 }}>
+          <Box mx={{ md: 20, sm:10, xs:2 }}>
 
             <Grid container spacing={{ md: 5, sm: 2, xs: 2 }}>
               <Grid item md={8} sm={12} xs={12}>
