@@ -51,6 +51,7 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
   
 
   const [save, setSave] = useState(false);
+  const [validated, setValidated] = useState(true);
 
   
 
@@ -60,27 +61,40 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
     email: "",
     phone: "", 
   });
- const handlePhonChange = (value, name) => {
-   
-   
-     setPayload((prevPayload) => ({
-       ...prevPayload,
-       phone: value,
-     }));
-   
- };
+ 
  const handleChange = (e) => {
    const {name, value} = e.target
      setPayload((prevPayload) => ({
        ...prevPayload,
        [name]: value,
      }));
+
+     if(name === 'phone'){
+      validatePhoneNumber(value);
+     }
   
+ };
+ const validatePhoneNumber = (phoneNumber) => {
+   // Regular expression to match phone numbers starting with '+'
+   const phoneRegex = /^\+/;
+   const response = phoneRegex.exec(phoneNumber);
+   if(!response){
+    setValidated(false)
+   }else{
+    setValidated(true);
+
+   }
+   return response;
  };
   
   const handleSubmit = (e) => {
     e.preventDefault();
     setSave(true);
+
+    if(!validated){
+      setSave(false)
+      return false
+    }
 
 
     axios
@@ -120,21 +134,14 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
           onClick: handleClose,
         }}
       >
-        
-        
         <DialogContent dividers>
           <Box component="form" onSubmit={handleSubmit} width="100%">
-            
-            
             <Stack spacing={2} width="100%">
-              
-            
               <FormControl variant="outlined" fullWidth>
-                
-            
                 <InputLabel htmlFor="firstName">First Name</InputLabel>
                 <OutlinedInput
-                  required size="small"
+                  required
+                  size="small"
                   id="firstName"
                   type="firstName"
                   name="firstName"
@@ -144,11 +151,11 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 />
               </FormControl>
               <FormControl variant="outlined" fullWidth>
-                
                 {/* Set fullWidth to make the FormControl fill the entire width */}
                 <InputLabel htmlFor="lastName">Last Name</InputLabel>
                 <OutlinedInput
-                  required size="small"
+                  required
+                  size="small"
                   id="lastName"
                   type="lastName"
                   name="lastName"
@@ -158,11 +165,11 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 />
               </FormControl>
               <FormControl variant="outlined" fullWidth>
-                
                 {/* Set fullWidth to make the FormControl fill the entire width */}
                 <InputLabel htmlFor="email">Email</InputLabel>
                 <OutlinedInput
-                  required size="small"
+                  required
+                  size="small"
                   id="email"
                   type="email"
                   name="email"
@@ -171,19 +178,35 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   label="Email"
                 />
               </FormControl>
-              <Box width="100%">
-                <PhoneInput
-                  forceDialCode
-                  defaultCountry="ua"
-                  value={payload.phone}
-                  onChange={(value, name) => handlePhonChange(value, name)}
-                  name="phone"
-                  containerStyle={{ width: "100%" }} // Ensure the container div fills the entire width
-                  inputStyle={{ width: "100%" }}
-                />
+              <Box>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel htmlFor="phone">Phone</InputLabel>
+                  <OutlinedInput
+                    required
+                    size="small"
+                    id="phone"
+                    type="text"
+                    name="phone"
+                    value={payload.phone}
+                    onChange={handleChange}
+                    label="Phone"
+                    error={!validated}
+                    onBlur={()=>validatePhoneNumber(payload.phone)}
+                  />
+                </FormControl>
+                {!validated && (
+                  <Text fs="10px" fw="400" color="red">
+                    Phone Number should begin with (+)
+                  </Text>
+                )}
               </Box>
               <Box width="100%" display="flex" justifyContent="center">
-                <LoadingButton loading={save} type="submit" variant="contained">
+                <LoadingButton
+                  loading={save}
+                  type="submit"
+                  variant="contained"
+                  sx={{ backgroundColor: "#002884", ml: "auto" }}
+                >
                   Save
                 </LoadingButton>
               </Box>

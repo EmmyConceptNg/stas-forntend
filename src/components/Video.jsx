@@ -74,7 +74,7 @@ const handleContinue = (item) => {
        sx={{ mb: "10px", display : { md: "none", lg: "none", xs: "block", sm: "block" } }}
        component={showVideo ? "iframe" : "img"}
        alt="Multimedia"
-       height={showVideo ? "auto" : "auto"}
+       height={showVideo ? 230 : "auto"}
        width="100%"
        title="Multimedia"
        src={
@@ -138,7 +138,7 @@ const handleContinue = (item) => {
      </Box>
      <Box bgcolor="#002884" borderRadius={3} sx={{ mb: "20px" }} p={2}>
        <Text fs="18px" fw="600" color="#fff">
-         Take 5 % off your next order
+         Take 5% off your next order
        </Text>
        <Text fs="18px" fw="400" color="#fff" my="20px">
          Stas Sorokin choose to give you an exclusive coupon for their Gigs
