@@ -53,37 +53,48 @@ const handleContinue = (item) => {
 
  return (
    <>
-     <CardMedia
-       
-       sx={{ mb: "10px", display : { md: "block", lg: "block", xs: "none", sm: "none" } }}
-       component={showVideo ? "iframe" : "img"}
-       alt="Multimedia"
-       height={showVideo ? "400px" : "auto"}
-       width="100%"
-       title="Multimedia"
-       src={
-         showVideo
-           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG&autoplay=1&muted=1"
-           : "/assets/images/stas.jpeg"
-       }
-       allowFullScreen={showVideo}
-     />
+     <Box>
+       <CardMedia
+         sx={{
+           mb: "10px",
+           display: { md: "block", lg: "block", xs: "block", sm: "block" },
+           position: "relative",
+           paddingTop: "56.25%", // 16:9 aspect ratio
+         }}
+       >
+         {showVideo ? (
+           <iframe
+             src="https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG&autoplay=1&muted=1"
+             title="YouTube video player"
+             allow="autoplay; encrypted-media"
+             allowFullScreen
+             style={{
+               position: "absolute",
+               top: 0,
+               left: 0,
+               width: "100%",
+               height: "100%",
+             }}
+           ></iframe>
+         ) : (
+           <img
+             src="/assets/images/stas.jpeg"
+             alt="Multimedia"
+             style={{
+               position: "absolute",
+               top: 0,
+               left: 0,
+               width: "100%",
+               height: "100%",
+               objectFit: "cover",
+             }}
+           />
+         )}
+       </CardMedia>
+     </Box>
 
      {/* mobile */}
-     <CardMedia
-       sx={{ mb: "10px", display : { md: "none", lg: "none", xs: "block", sm: "block" } }}
-       component={showVideo ? "iframe" : "img"}
-       alt="Multimedia"
-       height={showVideo ? 230 : "auto"}
-       width="100%"
-       title="Multimedia"
-       src={
-         showVideo
-           ? "https://www.youtube.com/embed/fAHC6grZURA?si=6K2nG9gKM6iOfyUG&autoplay=1&muted=1"
-           : "/assets/images/stas.jpeg"
-       }
-       allowFullScreen={showVideo}
-     />
+     
      <Box display={{ xs: "block", md: "none", lg: "none", sm: "block" }} my={1}>
        <Stack spacing={1} direction="row" alignItems="center">
          <Avatar

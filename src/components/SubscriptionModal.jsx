@@ -69,15 +69,15 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
        [name]: value,
      }));
 
-     if(name === 'phone'){
+     if(name === 'country_code'){
       validatePhoneNumber(value);
      }
   
  };
- const validatePhoneNumber = (phoneNumber) => {
+ const validatePhoneNumber = (code) => {
    // Regular expression to match phone numbers starting with '+'
    const phoneRegex = /^\+/;
-   const response = phoneRegex.exec(phoneNumber);
+   const response = phoneRegex.exec(code);
    if(!response){
     setValidated(false)
    }else{
@@ -91,25 +91,32 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
     e.preventDefault();
     setSave(true);
 
-    if(!validated){
-      setSave(false)
-      return false
+    if (!validated) {
+      setSave(false);
+      return false;
     }
 
+    // Remove leading zeros from the phone number
+    const trimmedPhone = payload.phone.replace(/^0+/, "");
+
+    // Concatenate country code and trimmed phone number
+    const fullPhoneNumber = `${payload.country_code}${trimmedPhone}`;
+
+    const updatedPayload = {
+      ...payload,
+      phone: fullPhoneNumber,
+    };
 
     axios
-      .post("/api/users", payload, {
+      .post("/api/users", updatedPayload, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-         location.href =
-           "https://www.fiverr.com/stas4000/develop-or-integrate-ai-powered-web-app-using-gpt3-or-openai";
-        notify(
-          "Thank You, You'll be redirected soon",
-          "success"
-        );
+        location.href =
+          "https://www.fiverr.com/stas4000/develop-or-integrate-ai-powered-web-app-using-gpt3-or-openai";
+        notify("Thank You, You'll be redirected soon", "success");
         setSave(false);
         setOpen(false);
       })
@@ -141,7 +148,6 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 <InputLabel htmlFor="firstName">First Name</InputLabel>
                 <OutlinedInput
                   required
-                  size="small"
                   id="firstName"
                   type="firstName"
                   name="firstName"
@@ -155,7 +161,6 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 <InputLabel htmlFor="lastName">Last Name</InputLabel>
                 <OutlinedInput
                   required
-                  size="small"
                   id="lastName"
                   type="lastName"
                   name="lastName"
@@ -169,7 +174,6 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 <InputLabel htmlFor="email">Email</InputLabel>
                 <OutlinedInput
                   required
-                  size="small"
                   id="email"
                   type="email"
                   name="email"
@@ -179,21 +183,34 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                 />
               </FormControl>
               <Box>
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel htmlFor="phone">Phone</InputLabel>
-                  <OutlinedInput
-                    required
-                    size="small"
-                    id="phone"
-                    type="text"
-                    name="phone"
-                    value={payload.phone}
-                    onChange={handleChange}
-                    label="Phone"
-                    error={!validated}
-                    onBlur={() => validatePhoneNumber(payload.phone)}
-                  />
-                </FormControl>
+                <Box display="flex" gap={{ md:"10px", lg:'10px', sm : '20px', xs : '20px' }}>
+                  <FormControl variant="outlined" >
+                  
+                    <OutlinedInput sx={{ width:'50px' }}
+                      required
+                      id="country_code"
+                      type="text"
+                      name="country_code"
+                      value={payload.country_code}
+                      onChange={handleChange}
+                      placeholder="+1"
+                      error={!validated}
+                      onBlur={() => validatePhoneNumber(payload.country_code)}
+                    />
+                  </FormControl>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="phone">Phone</InputLabel>
+                    <OutlinedInput
+                      required
+                      id="phone"
+                      type="text"
+                      name="phone"
+                      value={payload.phone}
+                      onChange={handleChange}
+                      label="Phone"
+                    />
+                  </FormControl>
+                </Box>
                 {!validated && (
                   <Text fs="10px" fw="400" color="red">
                     Phone Number should begin with (+)
@@ -207,7 +224,7 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   variant="contained"
                   sx={{ backgroundColor: "#68bc7b", ml: "auto" }}
                 >
-                  Save
+                  See on Fiverr
                 </LoadingButton>
               </Box>
             </Stack>
