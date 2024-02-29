@@ -33,32 +33,43 @@ export function Reviews() {
           "Thank you so much Joanna, I highly appreciate our work together, it looks like you will get the highest embeddings precision! I am fully dedicated to make this better then you even imagine! Thank you for our work together, and I am looking towards, future support and collaboration to provide you with the highest value",
       },
     },
+
     {
-      name: "rhyscartwrightj",
+      name: "Smartsedge",
       image: "",
-      rating: 4,
-      content: "Thanks",
-    },
-    {
-      name: "kayalade",
-      image: "",
-      rating: 4.5,
-      content: "Excellent Work",
+      rating: 5,
+      content:
+        "We are grateful for a seller who’s committed to fulfilling the requirements as best as he can.",
       reply: {
         name: "Seller's Response",
         content:
-          "Thank you, it's a pleasure working together and building your AI vision into reality.",
+          "Thank you for this remarkable work together, looking forward for a long and prosper business relationship.",
       },
     },
     {
       name: "sabreen2020",
       image: "",
-      rating: 4.5,
+      rating: 5,
 
-      content: "Great Job, love the work",
+      content:
+        "Great experience! Stas and the team were very professional, easy to collaborate with, good communicators, and solid engineers! Will definitely use them again!",
       reply: {
         name: "Seller's Response",
-        content: "Thank you, it's a real joy working together.",
+        content:
+          "Thank you, Jeff. Working together is a real pleasure as you are a visionary and a strategic thinking, empowered by critical thinking and remarkable management skills.",
+      },
+    },
+    {
+      name: "dreamxdeveloper",
+      image: "",
+      rating: 5,
+
+      content:
+        "Stas is amazing, and we are co-founders of an amazing combination of technology that will revolutionise the industry, all thanks to him and his team. He is a great guy too, and i could not be more happy. We will continue working to make the full development as planned.",
+      reply: {
+        name: "Seller's Response",
+        content:
+          "Thank you for your kind words, Lukas. I'm thrilled to be part of such an innovative project, and equally excited about our co-founder relationship. Your satisfaction and positive feedback truly mean a lot. I'm looking forward to accomplishing our planned development and revolutionizing the industry together!",
       },
     },
   ];

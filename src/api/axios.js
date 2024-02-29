@@ -7,7 +7,7 @@ if (
 ) {
   baseURL = 'http://localhost:4000';
 } else {
-  baseURL = "https://stas-server.onrender.com";
+  baseURL = "https://stas-server-iesi.onrender.com";
 }
 
 export default axios.create({

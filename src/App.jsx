@@ -53,26 +53,21 @@ export default function App() {
           <Box mx={{ md: 20, sm: 10, xs: 2 }}>
             <Grid container spacing={{ md: 5, sm: 2, xs: 2 }}>
               <Grid item md={8} sm={12} xs={12}>
-                
-                  <Hero />
-                
-                  <Video />
-                
-                
-                  <About />
-                
-                  <FAQ />
-                
+                <Hero />
 
-                
-                  <Reviews />
-                
+                <Video />
+
+                <About />
+
+                <FAQ />
+
+                <Reviews />
               </Grid>
               <Grid item md={4} sm={12} xs={12}>
                 <Box
                   mt={10}
                   position="sticky"
-                  top={0}
+                  top={100}
                   display={{ md: "block", lg: "block", xs: "none", sm: "none" }}
                 >
                   <Pricing />
