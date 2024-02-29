@@ -191,7 +191,7 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                     onChange={handleChange}
                     label="Phone"
                     error={!validated}
-                    onBlur={()=>validatePhoneNumber(payload.phone)}
+                    onBlur={() => validatePhoneNumber(payload.phone)}
                   />
                 </FormControl>
                 {!validated && (
@@ -205,7 +205,7 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
                   loading={save}
                   type="submit"
                   variant="contained"
-                  sx={{ backgroundColor: "#002884", ml: "auto" }}
+                  sx={{ backgroundColor: "#68bc7b", ml: "auto" }}
                 >
                   Save
                 </LoadingButton>
