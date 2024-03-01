@@ -12,8 +12,53 @@ import Video from "./components/Video";
 import About from "./components/About";
 import { Reviews } from "./components/Reviews";
 import FAQ from "./components/FAQ";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function App() {
+useEffect(() => {
+  const getCookieValue = (name) => {
+    const cookieName = `${name}=`;
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(";");
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === " ") {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length);
+      }
+    }
+    return "";
+  };
+
+  const fbcValue = getCookieValue("_fbc");
+
+  const fetchIpAddress = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org/?format=json");
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error("Error fetching IP address:", error);
+      return ""; // Return empty string in case of error
+    }
+  };
+
+  const fetchData = async () => {
+    const ipAddress = await fetchIpAddress();
+    const userAgent = navigator.userAgent;
+
+    axios.get(
+      `https://capi.bles-software.com?event=page_view&&pid=936189111057967&&ip=${ipAddress}&&us=${userAgent}&&accessTokens=EAATkZAMb9LmoBOZC8dxSqZAp1T4Blv2gmfVJp0IZB4vm2Qgp0Jnh6zudv5VBaMzWZAOMMwrp3Y07YjkFLlRVQUPI0ZCcZBrSUbVoPmBDWV9KoiwAyT4hEbK26pWGpyJBzMKFRvUYmhsRopfcyEgFJOZAtQaOBxX6bzq5KSwRybOjIva0ShccIvAhZB2o7oRglrqCxfAZDZD&&fbc=${fbcValue}`
+    );
+  };
+
+  fetchData();
+}, []);
+
+  
   return (
     <>
       <Helmet>

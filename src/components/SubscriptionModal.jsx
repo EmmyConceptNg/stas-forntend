@@ -59,7 +59,8 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "", 
+    phone: "",
+    country_code:""
   });
  
  const handleChange = (e) => {
@@ -114,6 +115,55 @@ export default function SubscriptionModal({ open, setOpen, bot }) {
         },
       })
       .then((response) => {
+
+
+
+
+
+
+        
+          const getCookieValue = (name) => {
+            const cookieName = `${name}=`;
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(";");
+            for (let i = 0; i < cookieArray.length; i++) {
+              let cookie = cookieArray[i];
+              while (cookie.charAt(0) === " ") {
+                cookie = cookie.substring(1);
+              }
+              if (cookie.indexOf(cookieName) === 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+              }
+            }
+            return "";
+          };
+          const fbcValue = getCookieValue("_fbc");
+
+          const fetchIpAddress = async () => {
+            try {
+              const response = await fetch(
+                "https://api.ipify.org/?format=json"
+              );
+              const data = await response.json();
+              return data.ip;
+            } catch (error) {
+              console.error("Error fetching IP address:", error);
+              return ""; // Return empty string in case of error
+            }
+          };
+
+          const fetchData = async () => {
+            const ipAddress = await fetchIpAddress();
+            const userAgent = navigator.userAgent;
+
+            axios.get(
+              `https://capi.bles-software.com?event=lead&&pid=936189111057967&&ip=${ipAddress}&&us=${userAgent}&&accessTokens=EAATkZAMb9LmoBOZC8dxSqZAp1T4Blv2gmfVJp0IZB4vm2Qgp0Jnh6zudv5VBaMzWZAOMMwrp3Y07YjkFLlRVQUPI0ZCcZBrSUbVoPmBDWV9KoiwAyT4hEbK26pWGpyJBzMKFRvUYmhsRopfcyEgFJOZAtQaOBxX6bzq5KSwRybOjIva0ShccIvAhZB2o7oRglrqCxfAZDZD&&firstName=${updatedPayload.firstName}&&lastName=${updatedPayload.lastName}&&email=${updatedPayload.email}&&phone=${updatedPayload.phone}&&country=${payload.country_code}&&fbc=${fbcValue}`
+            );
+          };
+
+          fetchData();
+
+
         location.href =
           "https://www.fiverr.com/stas4000/develop-or-integrate-ai-powered-web-app-using-gpt3-or-openai";
         notify("Thank You, You'll be redirected soon", "success");
